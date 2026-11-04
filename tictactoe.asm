@@ -32,6 +32,7 @@ main PROC
     print_str goodbye
     call WaitMsg                ; "Press any key to continue..."
     exit
+    main ENDP
 
 ; ------------------------------------------------------------
 ; draw_board: prints the 3x3 board from the board array
@@ -63,5 +64,5 @@ skip_sep:
     ret
 draw_board ENDP
 
-main ENDP
+
 END main
