@@ -11,6 +11,10 @@ welcome BYTE "=========================", 0Dh, 0Ah
         BYTE "=========================", 0Dh, 0Ah, 0
 goodbye BYTE 0Dh, 0Ah, "Thanks for playing!", 0Dh, 0Ah, 0
 
+promptA BYTE "Player ", 0
+promptB BYTE ", pick a cell (1-9): ", 0
+badMsg  BYTE "Invalid or taken cell, try again.", 0Dh, 0Ah, 0
+
 ; Board: 9 cells, row-major. ' ' = empty, 'X' / 'O' = taken.
 board   BYTE 9 DUP(' ')
 
@@ -19,7 +23,7 @@ current BYTE 'X'                ; whose turn it is
 moves   DWORD 0                 ; number of moves played
 
 colSep  BYTE " | ", 0
-rowSep  BYTE "---+---+---", 0Dh, 0Ah, 0
+rowSep  BYTE "---|---|---", 0Dh, 0Ah, 0
 
 ; ------------------------------------------------------------
 .code
@@ -27,12 +31,17 @@ main PROC
     print_str welcome
     call draw_board
 
-    ; (game loop goes here in later commits)
+    mov  ecx, 3                 ; TEMPORARY: 3 test moves
+test_loop:
+    call get_move
+    call Crlf
+    call draw_board
+    loop test_loop
 
     print_str goodbye
     call WaitMsg                ; "Press any key to continue..."
     exit
-    main ENDP
+main ENDP
 
 ; ------------------------------------------------------------
 ; draw_board: prints the 3x3 board from the board array
@@ -64,5 +73,31 @@ skip_sep:
     ret
 draw_board ENDP
 
+; ------------------------------------------------------------
+; get_move: prompts current player, validates, places mark on board
+; Receives: nothing   Returns: nothing (board updated)
+; ------------------------------------------------------------
+get_move PROC
+retry:
+    print_str promptA
+    mov  al, current
+    call WriteChar
+    print_str promptB
+    call ReadInt
+    jo   bad                    ; non-numeric input sets OF
+    cmp  eax, 1
+    jb   bad
+    cmp  eax, 9
+    ja   bad
+    dec  eax                    ; 1-9 -> 0-8
+    cmp  board[eax], ' '
+    jne  bad                    ; cell already taken
+    mov  bl, current
+    mov  board[eax], bl
+    ret
+bad:
+    print_str badMsg
+    jmp  retry
+get_move ENDP
 
 END main
