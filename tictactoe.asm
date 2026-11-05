@@ -224,6 +224,36 @@ check_col3:
     move winner, al
     jmp check_done
 
+check_diag1:
+    mov al, board[0]
+    cmp al, ' '
+    je check_diag2
+
+    cmp al, board[4]
+    jne check_diag2
+
+    cmp al, board[8]
+    jne check_diag2
+
+    move winner, al
+    jmp check_done
+
+
+check_diag2:
+    mov al, board[2]
+    cmp al, ' '
+    je check_done
+
+    cmp al, board[4]
+    jne check_done
+
+    cmp al, board[6]
+    jne check_done
+
+    move winner, al
+    jmp check_done
+
+
 check_done:
     ret
 check_winner ENDP
