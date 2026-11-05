@@ -39,6 +39,11 @@ test_loop:
     call get_move
     call Crlf
     call draw_board
+
+    call check_winner
+    cmp winner, ' '
+    jne game_won
+
     loop test_loop
 
     cmp moves, 9
