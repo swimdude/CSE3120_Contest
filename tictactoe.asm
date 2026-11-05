@@ -1,5 +1,4 @@
 INCLUDE Irvine32.inc
-
 print_str MACRO label
     mov  edx, OFFSET label
     call WriteString
@@ -48,6 +47,11 @@ test_loop:
 
     cmp moves, 9
     je game_tie
+    jmp game_end
+
+game_won:
+    mov al, winner
+    call WriteChar
     jmp game_end
 
 game_tie:
