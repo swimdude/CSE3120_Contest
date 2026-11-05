@@ -185,7 +185,30 @@ check_row3:
 check_col1:
     mov al, board[0]
     cmp al, ' '
-    je
+    je check_col2
+
+    mov al, board[3]
+    jne check_col2
+
+    mov al, board[6]
+    jne check_col2
+
+    mov winner, al
+    jmp check_done
+
+check_col2
+    mov al, board[1]
+    cmp al, ' '
+    je check_col3
+
+    cmp al, board[4]
+    jne check_col3
+
+    cmp al, board[7]
+    jne check_col3
+
+    move winner, al
+    jmp check_done
 
 check_done:
     ret
