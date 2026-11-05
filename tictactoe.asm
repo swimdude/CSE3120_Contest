@@ -141,15 +141,30 @@ get_move ENDP
 check_winner Proc
     mov al, board[0]
     cmp al, ' '
-    je check_done
+    je check_row2
 
     cmp al, board[1]
-    jne check_done
+    jne check_row2
 
     cmp al, board[2]
-    jne check_done
+    jne check_row2
 
     mov winner, al
+    jmp check_done
+
+check_row2:
+    mov al, board[3]
+    cmp al, ' '
+    je check_row3
+
+    cmp al, board[4]
+    je check_row3
+
+    cmp al, board[5]
+    je check_row3
+
+    mov winner
+    jmp check_done
 
 check_done:
     ret
