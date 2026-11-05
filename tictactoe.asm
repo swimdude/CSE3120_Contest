@@ -132,4 +132,12 @@ check_winner Proc
     cmp al, ' '
     je check_done
 
+    cmp al, board[1]
+    jne check_done
+
+    cmp al, board[2]
+    jne check_done
+
+    mov winner, al
+
 END main
