@@ -31,7 +31,7 @@ main PROC
     print_str welcome
     call draw_board
 
-    mov  ecx, 3                 ; TEMPORARY: 3 test moves
+    mov  ecx, 9                 ; 9 moves because tic tac toe has 9 grids
 test_loop:
     call get_move
     call Crlf
