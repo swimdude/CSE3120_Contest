@@ -14,6 +14,7 @@ goodbye BYTE 0Dh, 0Ah, "Thanks for playing!", 0Dh, 0Ah, 0
 promptA BYTE "Player ", 0
 promptB BYTE ", pick a cell (1-9): ", 0
 badMsg  BYTE "Invalid or taken cell, try again.", 0Dh, 0Ah, 0
+tieMsg Byte "The game is a tie!", 0Dh, 0Ah, 0
 
 ; Board: 9 cells, row-major. ' ' = empty, 'X' / 'O' = taken.
 board   BYTE 9 DUP(' ')
@@ -38,6 +39,14 @@ test_loop:
     call draw_board
     loop test_loop
 
+    cmp moves, 9
+    je game_tie
+    jmp game_end
+
+game_tie:
+    print_str tieMsg
+
+game_end:
     print_str goodbye
     call WaitMsg                ; "Press any key to continue..."
     exit
