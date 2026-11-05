@@ -78,6 +78,7 @@ draw_board ENDP
 ; Receives: nothing   Returns: nothing (board updated)
 ; ------------------------------------------------------------
 get_move PROC
+    push ebx
 retry:
     print_str promptA
     mov  al, current
