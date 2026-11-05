@@ -210,6 +210,20 @@ check_col2
     move winner, al
     jmp check_done
 
+check_col3:
+    mov al, board[2]
+    cmp al, ' '
+    je check_diag1
+
+    cmp al, board[5]
+    jne check_diag1
+
+    cmp al, board[8]
+    jne check_diag1
+
+    move winner, al
+    jmp check_done
+
 check_done:
     ret
 check_winner ENDP
