@@ -23,6 +23,8 @@ board   BYTE 9 DUP(' ')
 current BYTE 'X'                ; whose turn it is
 moves   DWORD 0                 ; number of moves played
 
+winner BYTE ' '        ;stores winner
+
 colSep  BYTE " | ", 0
 rowSep  BYTE "---|---|---", 0Dh, 0Ah, 0
 
