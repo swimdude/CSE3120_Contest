@@ -140,4 +140,8 @@ check_winner Proc
 
     mov winner, al
 
+check_done:
+    ret
+check_winner ENDP
+
 END main
