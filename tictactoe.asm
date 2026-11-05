@@ -96,6 +96,8 @@ retry:
     mov  bl, current
     mov  board[eax], bl
 
+    inc moves                ; counts moves
+
     cmp current, 'X'
     je change_to_o
 
