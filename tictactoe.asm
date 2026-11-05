@@ -127,4 +127,9 @@ bad:
     jmp  retry
 get_move ENDP
 
+check_winner Proc
+    mov al, board[0]
+    cmp al, ' '
+    je check_done
+
 END main
