@@ -95,7 +95,15 @@ retry:
     jne  bad                    ; cell already taken
     mov  bl, current
     mov  board[eax], bl
-    ret
+
+    cmp current, 'X'
+    je change_to_o
+
+    mov current, 'X'
+    jmp move_done
+
+
+    
 bad:
     print_str badMsg
     jmp  retry
