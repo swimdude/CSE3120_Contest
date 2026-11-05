@@ -158,12 +158,12 @@ check_row2:
     je check_row3
 
     cmp al, board[4]
-    je check_row3
+    jne check_row3
 
     cmp al, board[5]
-    je check_row3
+    jne check_row3
 
-    mov winner
+    mov winner, al
     jmp check_done
 
 check_row3:
@@ -171,13 +171,11 @@ check_row3:
     cmp al, ' '
     je check_col1
 
-    mov al, board[7]
-    cmp al, ' '
-    je check_col1
+    cmp al, board[7]
+    jne check_col1
 
-    mov al, board[8]
-    cmp al, ' '
-    je check_col1
+    cmp al, board[8]
+    jne check_col1
 
     mov winner, al
     jmp check_done
@@ -187,16 +185,16 @@ check_col1:
     cmp al, ' '
     je check_col2
 
-    mov al, board[3]
+    cmp al, board[3]
     jne check_col2
 
-    mov al, board[6]
+    cmp al, board[6]
     jne check_col2
 
     mov winner, al
     jmp check_done
 
-check_col2
+check_col2:
     mov al, board[1]
     cmp al, ' '
     je check_col3
@@ -207,7 +205,7 @@ check_col2
     cmp al, board[7]
     jne check_col3
 
-    move winner, al
+    mov winner, al
     jmp check_done
 
 check_col3:
@@ -221,7 +219,7 @@ check_col3:
     cmp al, board[8]
     jne check_diag1
 
-    move winner, al
+    mov winner, al
     jmp check_done
 
 check_diag1:
@@ -235,7 +233,7 @@ check_diag1:
     cmp al, board[8]
     jne check_diag2
 
-    move winner, al
+    mov winner, al
     jmp check_done
 
 
@@ -250,7 +248,7 @@ check_diag2:
     cmp al, board[6]
     jne check_done
 
-    move winner, al
+    mov winner, al
     jmp check_done
 
 
