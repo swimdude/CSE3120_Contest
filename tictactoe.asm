@@ -14,6 +14,7 @@ promptA BYTE "Player ", 0
 promptB BYTE ", pick a cell (1-9): ", 0
 badMsg  BYTE "Invalid or taken cell, try again.", 0Dh, 0Ah, 0
 tieMsg Byte "The game is a tie!", 0Dh, 0Ah, 0
+winMsg BYTE " wins the game!", 0Dh, 0Ah, 0
 
 ; Board: 9 cells, row-major. ' ' = empty, 'X' / 'O' = taken.
 board   BYTE 9 DUP(' ')
@@ -52,6 +53,7 @@ test_loop:
 game_won:
     mov al, winner
     call WriteChar
+    print_str winMsg
     jmp game_end
 
 game_tie:
