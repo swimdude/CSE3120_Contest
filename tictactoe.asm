@@ -166,6 +166,27 @@ check_row2:
     mov winner
     jmp check_done
 
+check_row3:
+    mov al, board[6]
+    cmp al, ' '
+    je check_col1
+
+    mov al, board[7]
+    cmp al, ' '
+    je check_col1
+
+    mov al, board[8]
+    cmp al, ' '
+    je check_col1
+
+    mov winner, al
+    jmp check_done
+
+check_col1:
+    mov al, board[0]
+    cmp al, ' '
+    je
+
 check_done:
     ret
 check_winner ENDP
