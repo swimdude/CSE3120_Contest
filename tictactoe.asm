@@ -102,7 +102,12 @@ retry:
     mov current, 'X'
     jmp move_done
 
+change_to_o:
+    mov current, 'O'
 
+move_done:
+    pop ebx
+    ret
     
 bad:
     print_str badMsg
